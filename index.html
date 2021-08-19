@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Fake Messenger</title>
+    <script src="js/localstoragekeys.js"></script>
+    <script src="js/classnames.js"></script>
+  </head>
+  <body>
+    <main>
+      <div id="chatroom">
+        <div id="chatroom-upside">
+          <span id="chatroom-title">타이틀</span>
+        </div>
+
+        <div id="chat-list">
+        </div>
+
+        <form id="message-to-send">
+          <select id="sender">
+            <option value="0">나</option>
+            <option value="1">상대방</option>
+          </select>
+          <input id="message" type="text" placeholder="메시지를 입력하세요." />
+          <input type="submit" value="전송" />
+        </form>
+      </div>
+
+    </main>
+
+    <script src="js/chatroom.js"></script>
+  </body>
+</html>
