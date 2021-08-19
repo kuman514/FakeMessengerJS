@@ -48,9 +48,18 @@ function saveUsersToLocalStorage() {
 }
 
 function loadChatFromLocalStorage() {
+  const loadedRawMessages = localStorage.getItem(MESSAGES_KEY);
+  if (loadedRawMessages !== null) {
+    const loadedMessages = JSON.parse(loadedRawMessages);
+    for (const msg of loadedMessages) {
+      pushChat(msg);
+      paintChat(msg);
+    }
+  }
 }
 
 function saveChatsToLocalStorage() {
+  localStorage.setItem(MESSAGES_KEY, JSON.stringify(chats));
 }
 
 function getUserIndex(userId) {
@@ -116,3 +125,4 @@ messageToSend.addEventListener('submit', (event) => {
   message.value = '';
 });
 loadUsersFromLocalStorage();
+loadChatFromLocalStorage();
