@@ -1,5 +1,8 @@
 const senderSelect = document.querySelector('#sender');
 
+const userListConfig = document.querySelector('#user-list-config');
+const userList = document.querySelector('#user-list');
+
 // {id, nickname, profilePic, bgPic, birthday}
 const users = [];
 
@@ -27,7 +30,7 @@ function loadUsersFromLocalStorage() {
   }
 
   const loadedOpponents = localStorage.getItem(OPPONENTS_PROFILE_KEY);
-  if (loadedOpponents === null) {
+  if (loadedOpponents === null || loadedOpponents === '[]') {
     users.push({
       id: 1,
       nickname: 'default opponent',
@@ -40,7 +43,7 @@ function loadUsersFromLocalStorage() {
   }
 
   for (const user of users) {
-    paintUserSelect(user);
+    paintUser(user);
   }
   saveUsersToLocalStorage();
 }
@@ -54,6 +57,48 @@ function paintUserSelect(newUser) {
   const newOption = document.createElement('option');
   newOption.value = newUser.id;
   newOption.innerText = newUser.nickname;
+  newOption.id = `sender-${newUser.id}`;
 
   senderSelect.appendChild(newOption);
+}
+
+function onRemoveUser(event) {
+  const removeId = parseInt(event.target.parentElement.id);
+  event.target.parentElement.remove();
+
+  const removeSelection = document.querySelector(`#sender-${removeId}`);
+  if (removeSelection !== null) {
+    removeSelection.remove();
+  }
+
+  for (const index in users) {
+    if (users[index].id === removeId) {
+      users.splice(index, 1);
+      break;
+    }
+  }
+
+  saveUsersToLocalStorage();
+}
+
+function paintUserListItem(newUser) {
+  const newListItem = document.createElement('li');
+  newListItem.id = newUser.id;
+  newListItem.innerText = newUser.nickname;
+
+  //const modifyButton = document.createElement('button');
+
+  if (newUser.id !== 0) {
+    const removeButton = document.createElement('button');
+    removeButton.innerText = '❌';
+    removeButton.addEventListener('click', onRemoveUser);
+    newListItem.appendChild(removeButton);
+  }
+
+  userList.appendChild(newListItem);
+}
+
+function paintUser(newUser) {
+  paintUserSelect(newUser);
+  paintUserListItem(newUser);
 }
