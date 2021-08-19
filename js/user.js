@@ -1,3 +1,5 @@
+const senderSelect = document.querySelector('#sender');
+
 // {id, nickname, profilePic, bgPic, birthday}
 const users = [];
 
@@ -37,10 +39,21 @@ function loadUsersFromLocalStorage() {
     users.push(...(JSON.parse(loadedOpponents)));
   }
 
+  for (const user of users) {
+    paintUserSelect(user);
+  }
   saveUsersToLocalStorage();
 }
 
 function saveUsersToLocalStorage() {
   localStorage.setItem(MY_PROFILE_KEY, JSON.stringify(users[0]));
   localStorage.setItem(OPPONENTS_PROFILE_KEY, JSON.stringify(users.slice(1)));
+}
+
+function paintUserSelect(newUser) {
+  const newOption = document.createElement('option');
+  newOption.value = newUser.id;
+  newOption.innerText = newUser.nickname;
+
+  senderSelect.appendChild(newOption);
 }
