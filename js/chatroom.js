@@ -6,46 +6,8 @@ const messageToSend = document.querySelector('#message-to-send');
 const sender = messageToSend.querySelector('#sender');
 const message = messageToSend.querySelector('#message');
 
-// {id, nickname, profilePic, bgPic, birthday}
-const users = [];
-
 // {id, senderId, message, timestamp}
 const chats = [];
-
-function loadUsersFromLocalStorage() {
-  const loadedMe = localStorage.getItem(MY_PROFILE_KEY);
-  if (loadedMe === null) {
-    users.push({
-      id: 0,
-      nickname: 'default me',
-      profilePic: '',
-      bgPic: '',
-      birthday: new Date()
-    });
-  } else {
-    users.push(JSON.parse(loadedMe));
-  }
-
-  const loadedOpponents = localStorage.getItem(OPPONENTS_PROFILE_KEY);
-  if (loadedOpponents === null) {
-    users.push({
-      id: 1,
-      nickname: 'default opponent',
-      profilePic: '',
-      bgPic: '',
-      birthday: new Date()
-    });
-  } else {
-    users.push(...(JSON.parse(loadedOpponents)));
-  }
-
-  saveUsersToLocalStorage();
-}
-
-function saveUsersToLocalStorage() {
-  localStorage.setItem(MY_PROFILE_KEY, JSON.stringify(users[0]));
-  localStorage.setItem(OPPONENTS_PROFILE_KEY, JSON.stringify(users.slice(1)));
-}
 
 function loadChatFromLocalStorage() {
   const loadedRawMessages = localStorage.getItem(MESSAGES_KEY);
@@ -60,15 +22,6 @@ function loadChatFromLocalStorage() {
 
 function saveChatsToLocalStorage() {
   localStorage.setItem(MESSAGES_KEY, JSON.stringify(chats));
-}
-
-function getUserIndex(userId) {
-  for (const index in users) {
-    if (users[index].id === userId) {
-      return index;
-    }
-  }
-  return null;
 }
 
 function pushChat(newChat) {
@@ -111,7 +64,7 @@ function paintChat(newChat) {
   chatList.appendChild(newChatElement);
 }
 
-messageToSend.addEventListener('submit', (event) => {
+function onMessageSubmit(event) {
   event.preventDefault();
   const newChat = {
     id: Date.now(),
@@ -123,6 +76,4 @@ messageToSend.addEventListener('submit', (event) => {
   paintChat(newChat);
   saveChatsToLocalStorage();
   message.value = '';
-});
-loadUsersFromLocalStorage();
-loadChatFromLocalStorage();
+}
