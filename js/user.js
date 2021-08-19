@@ -32,7 +32,7 @@ function loadUsersFromLocalStorage() {
   const loadedOpponents = localStorage.getItem(OPPONENTS_PROFILE_KEY);
   if (loadedOpponents === null || loadedOpponents === '[]') {
     users.push({
-      id: 1,
+      id: Date.now(),
       nickname: 'default opponent',
       profilePic: '',
       bgPic: '',

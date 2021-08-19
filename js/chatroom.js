@@ -36,7 +36,14 @@ function pushChat(newChat) {
 function paintChat(newChat) {
   const newChatElement = document.createElement('div');
   newChatElement.id = newChat.id;
-  const sendUser = users[getUserIndex(newChat.senderId)];
+  const sendUserIndex = getUserIndex(newChat.senderId);
+  const sendUser = (sendUserIndex !== null) ? users[sendUserIndex] : {
+    id: null,
+    nickname: '(알 수 없음)',
+    profilePic: '',
+    bgPic: '',
+    birthday: ''
+  };
 
   switch (newChat.senderId) {
     case 0:
