@@ -146,7 +146,7 @@ function onModifySubmit(event) {
   userModify.classList.add(HIDDEN_CLASSNAME);
   saveUsersToLocalStorage();
 
-  reapintChat();
+  repaintChat();
 }
 
 function onRemoveUser(event) {
@@ -162,7 +162,7 @@ function onRemoveUser(event) {
   users.splice(getUserIndex(removeId), 1);
   saveUsersToLocalStorage();
 
-  reapintChat();
+  repaintChat();
 }
 
 function paintUserListItem(newUser) {

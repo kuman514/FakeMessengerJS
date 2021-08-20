@@ -46,7 +46,7 @@ function clearChat() {
   chatList.innerText = '';
 }
 
-function reapintChat() {
+function repaintChat() {
   clearChat();
   for (const msg of chats) {
     paintChat(msg);
