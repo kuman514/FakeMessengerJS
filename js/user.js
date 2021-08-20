@@ -3,6 +3,11 @@ const senderSelect = document.querySelector('#sender');
 const userListConfig = document.querySelector('#user-list-config');
 const userList = document.querySelector('#user-list');
 
+const userModify = document.querySelector('#user-modify');
+const savedUserId = userModify.querySelector('#user-id-save');
+const nicknameModify = userModify.querySelector('#nickname-modify');
+const profilePicModify = userModify.querySelector('#profile-pic-modify');
+
 // {id, nickname, profilePic, bgPic, birthday}
 const users = [];
 
@@ -62,8 +67,43 @@ function paintUserSelect(newUser) {
   senderSelect.appendChild(newOption);
 }
 
+function onModifyUser(event) {
+  const idString = event.target.parentElement.id.split('-')[1];
+  const modifyId = parseInt(idString);
+  const modifyingUser = users[getUserIndex(modifyId)];
+
+  savedUserId.value = modifyId;
+  nicknameModify.value = modifyingUser.nickname;
+  profilePicModify.value = modifyingUser.profilePic;
+
+  userModify.classList.remove(HIDDEN_CLASSNAME);
+}
+
+function onModifySubmit(event) {
+  event.preventDefault();
+  const modifyId = parseInt(savedUserId.value);
+
+  const modifyingUserIndex = getUserIndex(modifyId);
+  users[modifyingUserIndex].nickname = nicknameModify.value;
+  users[modifyingUserIndex].profilePic = profilePicModify.value;
+
+  const modifyListItem = document.querySelector(`#li-${modifyId} span`);
+  if (modifyListItem !== null) {
+    modifyListItem.innerText = nicknameModify.value;
+  }
+
+  const modifySelection = document.querySelector(`#sender-${modifyId}`);
+  if (modifySelection !== null) {
+    modifySelection.innerText = nicknameModify.value;
+  }
+
+  userModify.classList.add(HIDDEN_CLASSNAME);
+  saveUsersToLocalStorage();
+}
+
 function onRemoveUser(event) {
-  const removeId = parseInt(event.target.parentElement.id);
+  const idString = event.target.parentElement.id.split('-')[1];
+  const removeId = parseInt(idString);
   event.target.parentElement.remove();
 
   const removeSelection = document.querySelector(`#sender-${removeId}`);
@@ -71,22 +111,23 @@ function onRemoveUser(event) {
     removeSelection.remove();
   }
 
-  for (const index in users) {
-    if (users[index].id === removeId) {
-      users.splice(index, 1);
-      break;
-    }
-  }
+  users.splice(getUserIndex(removeId), 1);
 
   saveUsersToLocalStorage();
 }
 
 function paintUserListItem(newUser) {
   const newListItem = document.createElement('li');
-  newListItem.id = newUser.id;
-  newListItem.innerText = newUser.nickname;
+  newListItem.id = `li-${newUser.id}`;
 
-  //const modifyButton = document.createElement('button');
+  const liNickname = document.createElement('span');
+  liNickname.innerText = newUser.nickname;
+  newListItem.appendChild(liNickname);
+
+  const modifyButton = document.createElement('button');
+  modifyButton.innerText = '🔧';
+  modifyButton.addEventListener('click', onModifyUser);
+  newListItem.appendChild(modifyButton);
 
   if (newUser.id !== 0) {
     const removeButton = document.createElement('button');
