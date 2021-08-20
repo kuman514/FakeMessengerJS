@@ -8,6 +8,11 @@ const savedUserId = userModify.querySelector('#user-id-save');
 const nicknameModify = userModify.querySelector('#nickname-modify');
 const profilePicModify = userModify.querySelector('#profile-pic-modify');
 
+const userCreateButton = document.querySelector('#user-create-button');
+const userCreate = document.querySelector('#user-create');
+const nicknameCreate = userCreate.querySelector('#nickname-create');
+const profilePicCreate = userCreate.querySelector('#profile-pic-create');
+
 // {id, nickname, profilePic, bgPic, birthday}
 const users = [];
 
@@ -68,11 +73,27 @@ function paintUserSelect(newUser) {
 }
 
 function onCreateUser() {
-
+  userCreate.classList.remove(HIDDEN_CLASSNAME);
 }
 
 function onCreateSubmit(event) {
+  event.preventDefault();
+  const newUser = {
+    id: Date.now(),
+    nickname: nicknameCreate.value,
+    profilePic: profilePicCreate.value,
+    bgPic: '',
+    birthday: new Date()
+  };
 
+  nicknameCreate.value = '';
+  profilePicCreate.value = '';
+
+  users.push(newUser);
+  saveUsersToLocalStorage();
+  paintUser(newUser);
+
+  userCreate.classList.add(HIDDEN_CLASSNAME);
 }
 
 function onModifyUser(event) {

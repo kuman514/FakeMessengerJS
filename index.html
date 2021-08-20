@@ -30,9 +30,16 @@
       <div id="user-list-config">
         <div id="user-list-upside">
           <span id="user-list-title">유저 관리</span>
+          <button id="user-create-button">➕</button>
         </div>
         <ul id="user-list">
         </ul>
+        <form id="user-create" class="hidden">
+          <input id="nickname-create" type="text" placeholder="새로운 상대의 닉네임을 입력하세요." required />
+          <label>프로필 사진</label>
+          <input id="profile-pic-create" type="file" />
+          <input type="submit" value="생성" />
+        </form>
         <form id="user-modify" class="hidden">
           <input id="user-id-save" type="hidden" value="0" />
           <input id="nickname-modify" type="text" placeholder="변경할 닉네임을 입력하세요." required />
