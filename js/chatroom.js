@@ -74,9 +74,12 @@ function paintChat(newChat) {
   who.innerText = sendUser.nickname;
   const msg = document.createElement('span');
   msg.innerText = newChat.message;
+  const ts = document.createElement('span');
+  ts.innerText = newChat.timestamp;
 
   chatContent.appendChild(who);
   chatContent.appendChild(msg);
+  chatContent.appendChild(ts);
   newChatElement.appendChild(chatContent);
 
   chatList.appendChild(newChatElement);
