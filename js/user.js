@@ -67,6 +67,14 @@ function paintUserSelect(newUser) {
   senderSelect.appendChild(newOption);
 }
 
+function onCreateUser() {
+
+}
+
+function onCreateSubmit(event) {
+
+}
+
 function onModifyUser(event) {
   const idString = event.target.parentElement.id.split('-')[1];
   const modifyId = parseInt(idString);
@@ -99,6 +107,8 @@ function onModifySubmit(event) {
 
   userModify.classList.add(HIDDEN_CLASSNAME);
   saveUsersToLocalStorage();
+
+  reapintChat();
 }
 
 function onRemoveUser(event) {
@@ -112,8 +122,9 @@ function onRemoveUser(event) {
   }
 
   users.splice(getUserIndex(removeId), 1);
-
   saveUsersToLocalStorage();
+
+  reapintChat();
 }
 
 function paintUserListItem(newUser) {

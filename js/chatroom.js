@@ -33,6 +33,17 @@ function pushChat(newChat) {
   });
 }
 
+function clearChat() {
+  chatList.innerText = '';
+}
+
+function reapintChat() {
+  clearChat();
+  for (const msg of chats) {
+    paintChat(msg);
+  }
+}
+
 function paintChat(newChat) {
   const newChatElement = document.createElement('div');
   newChatElement.id = newChat.id;
