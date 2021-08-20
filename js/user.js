@@ -9,12 +9,14 @@ const savedUserId = userModify.querySelector('#user-id-save');
 const nicknameModify = userModify.querySelector('#nickname-modify');
 const commentModify = userModify.querySelector('#comment-modify');
 const birthdayModify = userModify.querySelector('#birthday-modify');
+const cancelModify = userModify.querySelector('#cancel-modify');
 
 const userCreateButton = document.querySelector('#user-create-button');
 const userCreate = document.querySelector('#user-create');
 const nicknameCreate = userCreate.querySelector('#nickname-create');
 const commentCreate = userCreate.querySelector('#comment-create');
 const birthdayCreate = userCreate.querySelector('#birthday-create');
+const cancelCreate = userCreate.querySelector('#cancel-create');
 
 // {id, nickname, comment, birthday}
 const users = [];
@@ -105,14 +107,20 @@ function onCreateSubmit(event) {
     birthday: birthdayCreate.value
   };
 
+  users.push(newUser);
+  closeUserCreate(event);
+  saveUsersToLocalStorage();
+  paintUser(newUser);
+}
+
+function closeUserCreate(event) {
+  if (event) {
+    event.preventDefault();
+  }
+
   nicknameCreate.value = '';
   commentCreate.value = '';
   birthdayCreate.value = '';
-
-  users.push(newUser);
-  saveUsersToLocalStorage();
-  paintUser(newUser);
-
   userCreate.classList.add(HIDDEN_CLASSNAME);
 }
 
@@ -148,14 +156,21 @@ function onModifySubmit(event) {
     modifySelection.innerText = nicknameModify.value;
   }
 
+  closeUserModify(event);
+  saveUsersToLocalStorage();
+  repaintChat();
+}
+
+function closeUserModify(event) {
+  if (event) {
+    event.preventDefault();
+  }
+  
+  savedUserId.value = '';
   nicknameModify.value = '';
   commentModify.value = '';
   birthdayModify.value = '';
-
   userModify.classList.add(HIDDEN_CLASSNAME);
-  saveUsersToLocalStorage();
-
-  repaintChat();
 }
 
 function onRemoveUser(event) {
