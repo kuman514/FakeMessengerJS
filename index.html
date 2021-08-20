@@ -36,16 +36,22 @@
         <ul id="user-list">
         </ul>
         <form id="user-create" class="hidden">
+          <label>이름</label>
           <input id="nickname-create" type="text" placeholder="새로운 상대의 닉네임을 입력하세요." required />
-          <label>프로필 사진</label>
-          <input id="profile-pic-create" type="file" />
+          <label>상태 메시지</label>
+          <input id="comment-create" type="text" placeholder="상태 메시지" />
+          <label>생일</label>
+          <input id="birthday-create" type="date" />
           <input type="submit" value="생성" />
         </form>
         <form id="user-modify" class="hidden">
           <input id="user-id-save" type="hidden" value="0" />
+          <label>이름</label>
           <input id="nickname-modify" type="text" placeholder="변경할 닉네임을 입력하세요." required />
-          <label>프로필 사진</label>
-          <input id="profile-pic-modify" type="file" />
+          <label>상태 메시지</label>
+          <input id="comment-modify" type="text" placeholder="상태 메시지" />
+          <label>생일</label>
+          <input id="birthday-modify" type="date" />
           <input type="submit" value="수정" />
         </form>
       </div>

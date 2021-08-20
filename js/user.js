@@ -7,14 +7,16 @@ const userList = document.querySelector('#user-list');
 const userModify = document.querySelector('#user-modify');
 const savedUserId = userModify.querySelector('#user-id-save');
 const nicknameModify = userModify.querySelector('#nickname-modify');
-const profilePicModify = userModify.querySelector('#profile-pic-modify');
+const commentModify = userModify.querySelector('#comment-modify');
+const birthdayModify = userModify.querySelector('#birthday-modify');
 
 const userCreateButton = document.querySelector('#user-create-button');
 const userCreate = document.querySelector('#user-create');
 const nicknameCreate = userCreate.querySelector('#nickname-create');
-const profilePicCreate = userCreate.querySelector('#profile-pic-create');
+const commentCreate = userCreate.querySelector('#comment-create');
+const birthdayCreate = userCreate.querySelector('#birthday-create');
 
-// {id, nickname, profilePic, bgPic, birthday}
+// {id, nickname, comment, birthday}
 const users = [];
 
 function showUserConfig() {
@@ -48,9 +50,8 @@ function loadUsersFromLocalStorage() {
     users.push({
       id: 0,
       nickname: 'default me',
-      profilePic: '',
-      bgPic: '',
-      birthday: new Date()
+      comment: 'Hello myself',
+      birthday: ''
     });
   } else {
     users.push(JSON.parse(loadedMe));
@@ -61,9 +62,8 @@ function loadUsersFromLocalStorage() {
     users.push({
       id: Date.now(),
       nickname: 'default opponent',
-      profilePic: '',
-      bgPic: '',
-      birthday: new Date()
+      comment: 'Hello opponent',
+      birthday: ''
     });
   } else {
     users.push(...(JSON.parse(loadedOpponents)));
@@ -72,7 +72,10 @@ function loadUsersFromLocalStorage() {
   for (const user of users) {
     paintUser(user);
   }
-  saveUsersToLocalStorage();
+
+  if (loadedMe === null || loadedOpponents === null || loadedOpponents === '[]') {
+    saveUsersToLocalStorage();
+  }
 }
 
 function saveUsersToLocalStorage() {
@@ -98,13 +101,13 @@ function onCreateSubmit(event) {
   const newUser = {
     id: Date.now(),
     nickname: nicknameCreate.value,
-    profilePic: profilePicCreate.value,
-    bgPic: '',
-    birthday: new Date()
+    comment: commentCreate.value,
+    birthday: birthdayCreate.value
   };
 
   nicknameCreate.value = '';
-  profilePicCreate.value = '';
+  commentCreate.value = '';
+  birthdayCreate.value = '';
 
   users.push(newUser);
   saveUsersToLocalStorage();
@@ -120,7 +123,8 @@ function onModifyUser(event) {
 
   savedUserId.value = modifyId;
   nicknameModify.value = modifyingUser.nickname;
-  profilePicModify.value = modifyingUser.profilePic;
+  commentModify.value = modifyingUser.comment;
+  birthdayModify.value = modifyingUser.birthday;
 
   userModify.classList.remove(HIDDEN_CLASSNAME);
 }
@@ -131,7 +135,8 @@ function onModifySubmit(event) {
 
   const modifyingUserIndex = getUserIndex(modifyId);
   users[modifyingUserIndex].nickname = nicknameModify.value;
-  users[modifyingUserIndex].profilePic = profilePicModify.value;
+  users[modifyingUserIndex].comment = commentModify.value;
+  users[modifyingUserIndex].birthday = birthdayModify.value;
 
   const modifyListItem = document.querySelector(`#li-${modifyId} span`);
   if (modifyListItem !== null) {
@@ -142,6 +147,10 @@ function onModifySubmit(event) {
   if (modifySelection !== null) {
     modifySelection.innerText = nicknameModify.value;
   }
+
+  nicknameModify.value = '';
+  commentModify.value = '';
+  birthdayModify.value = '';
 
   userModify.classList.add(HIDDEN_CLASSNAME);
   saveUsersToLocalStorage();

@@ -23,6 +23,7 @@ function loadChatFromLocalStorage() {
   if (loadedRawMessages !== null) {
     const loadedMessages = JSON.parse(loadedRawMessages);
     for (const msg of loadedMessages) {
+      msg.timestamp = new Date(msg.timestamp);
       pushChat(msg);
       paintChat(msg);
     }
@@ -60,8 +61,6 @@ function paintChat(newChat) {
   const sendUser = (sendUserIndex !== null) ? users[sendUserIndex] : {
     id: null,
     nickname: '(알 수 없음)',
-    profilePic: '',
-    bgPic: '',
     birthday: ''
   };
 
@@ -71,10 +70,6 @@ function paintChat(newChat) {
       break;
     default:
       newChatElement.className = OPPONENT_CHAT_CLASSNAME;
-      const profilePic = document.createElement('img');
-      profilePic.className = PROFILE_PIC_CLASSNAME;
-      profilePic.src = sendUser.profilePic;
-      newChatElement.appendChild(profilePic);
       break;
   }
 
