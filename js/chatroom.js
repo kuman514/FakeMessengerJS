@@ -1,5 +1,3 @@
-const chatroomTitle = document.querySelector('#chatroom-title');
-
 const chatList = document.querySelector('#chat-list');
 
 const messageToSend = document.querySelector('#message-to-send');

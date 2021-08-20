@@ -14,6 +14,11 @@
       <div id="chatroom">
         <div id="chatroom-upside">
           <span id="chatroom-title">타이틀</span>
+          <form id="title-modify" class="hidden">
+            <input id="title-input" type="text" placeholder="타이틀 이름" required />
+            <input type="submit" value="수정" />
+          </form>
+          <button id="title-modify-button">타이틀 수정</button>
           <button id="user-config-button">유저 관리</button>
         </div>
 
@@ -64,6 +69,7 @@
 
     <script src="js/chatroom.js"></script>
     <script src="js/user.js"></script>
+    <script src="js/title.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>
