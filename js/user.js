@@ -1,5 +1,6 @@
 const senderSelect = document.querySelector('#sender');
 
+const userConfigButton = document.querySelector(`#user-config-button`);
 const userListConfig = document.querySelector('#user-list-config');
 const userList = document.querySelector('#user-list');
 
@@ -15,6 +16,22 @@ const profilePicCreate = userCreate.querySelector('#profile-pic-create');
 
 // {id, nickname, profilePic, bgPic, birthday}
 const users = [];
+
+function showUserConfig() {
+  userListConfig.classList.remove(HIDDEN_CLASSNAME);
+}
+
+function closeUserConfig() {
+  userListConfig.classList.add(HIDDEN_CLASSNAME);
+}
+
+function toggleVisibilityUserConfig() {
+  if (userListConfig.classList.contains(HIDDEN_CLASSNAME)) {
+    showUserConfig();
+  } else {
+    closeUserConfig();
+  }
+}
 
 function getUserIndex(userId) {
   for (const index in users) {
