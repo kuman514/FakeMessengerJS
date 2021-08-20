@@ -9,6 +9,15 @@ const message = messageToSend.querySelector('#message');
 // {id, senderId, message, timestamp}
 const chats = [];
 
+function getChatIndex(chatId) {
+  for (const index in chats) {
+    if (chats[index].id === chatId) {
+      return index;
+    }
+  }
+  return null;
+}
+
 function loadChatFromLocalStorage() {
   const loadedRawMessages = localStorage.getItem(MESSAGES_KEY);
   if (loadedRawMessages !== null) {
@@ -46,7 +55,7 @@ function reapintChat() {
 
 function paintChat(newChat) {
   const newChatElement = document.createElement('div');
-  newChatElement.id = newChat.id;
+  newChatElement.id = `message-${newChat.id}`;
   const sendUserIndex = getUserIndex(newChat.senderId);
   const sendUser = (sendUserIndex !== null) ? users[sendUserIndex] : {
     id: null,
@@ -77,9 +86,15 @@ function paintChat(newChat) {
   const ts = document.createElement('span');
   ts.innerText = newChat.timestamp;
 
+  const deleteButton = document.createElement('button');
+  deleteButton.innerText = '❌';
+  deleteButton.addEventListener('click', removeMessage);
+
   chatContent.appendChild(who);
   chatContent.appendChild(msg);
   chatContent.appendChild(ts);
+  chatContent.appendChild(deleteButton);
+
   newChatElement.appendChild(chatContent);
 
   chatList.appendChild(newChatElement);
@@ -97,4 +112,11 @@ function onMessageSubmit(event) {
   paintChat(newChat);
   saveChatsToLocalStorage();
   message.value = '';
+}
+
+function removeMessage(event) {
+  const deleteMsgId = parseInt(event.target.parentElement.parentElement.id.split('-')[1]);
+  event.target.parentElement.parentElement.remove();
+  chats.splice(getChatIndex(deleteMsgId), 1);
+  saveChatsToLocalStorage();
 }
