@@ -10,5 +10,6 @@ cancelCreate.addEventListener('click', closeUserCreate);
 titleModify.addEventListener('submit', onTitleModifySubmit);
 titleModifyButton.addEventListener('click', toggleVisibilityTitleModify);
 
+loadTitleFromLocalStorage();
 loadUsersFromLocalStorage();
 loadChatFromLocalStorage();
