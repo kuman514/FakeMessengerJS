@@ -11,4 +11,20 @@ body {
 main {
   width: inherit;
   height: inherit;
+  display: flex;
+  flex-direction: row;
+  background-color: lightblue;
+}
+
+#chatroom {
+  display: grid;
+  grid-template-rows: 50px 1fr 50px;
+}
+
+#message-to-send {
+  width: inherit;
+}
+
+#user-list-config {
+  background-color: white;
 }
