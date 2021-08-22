@@ -13,12 +13,18 @@ main {
   height: inherit;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   background-color: lightblue;
 }
 
 #chatroom {
+  width: inherit;
   display: grid;
   grid-template-rows: 50px 1fr 50px;
+}
+
+#chat-list, #user-list {
+  overflow-y: scroll;
 }
 
 #message-to-send {
@@ -26,6 +32,10 @@ main {
 }
 
 #user-list-config {
+  position: fixed;
+  height: inherit;
+  right: 0;
+  top: 0;
   background-color: white;
 }
 
