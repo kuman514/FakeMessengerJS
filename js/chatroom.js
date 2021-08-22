@@ -62,15 +62,6 @@ function paintChat(newChat) {
     birthday: ''
   };
 
-  switch (newChat.senderId) {
-    case 0:
-      newChatElement.className = MY_CHAT_CLASSNAME;
-      break;
-    default:
-      newChatElement.className = OPPONENT_CHAT_CLASSNAME;
-      break;
-  }
-
   const chatContent = document.createElement('div');
   const who = document.createElement('span');
   who.innerText = sendUser.nickname;
@@ -83,10 +74,22 @@ function paintChat(newChat) {
   deleteButton.innerText = '❌';
   deleteButton.addEventListener('click', removeMessage);
 
-  chatContent.appendChild(who);
-  chatContent.appendChild(msg);
-  chatContent.appendChild(ts);
-  chatContent.appendChild(deleteButton);
+  newChatElement.appendChild(who);
+  
+  switch (newChat.senderId) {
+    case 0:
+      newChatElement.className = MY_CHAT_CLASSNAME;
+      chatContent.appendChild(deleteButton);
+      chatContent.appendChild(ts);
+      chatContent.appendChild(msg);
+      break;
+    default:
+      newChatElement.className = OPPONENT_CHAT_CLASSNAME;
+      chatContent.appendChild(msg);
+      chatContent.appendChild(ts);
+      chatContent.appendChild(deleteButton);
+      break;
+  }
 
   newChatElement.appendChild(chatContent);
 
