@@ -28,3 +28,11 @@ main {
 #user-list-config {
   background-color: white;
 }
+
+.my-chat {
+  text-align: right;
+}
+
+.opponent-chat {
+  text-align: left;
+}
