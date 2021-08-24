@@ -43,6 +43,14 @@ main {
   text-align: right;
 }
 
+.my-chat > div {
+  background-color: yellow;
+}
+
 .opponent-chat {
   text-align: left;
+}
+
+.opponent-chat > div {
+  background-color: white;
 }
