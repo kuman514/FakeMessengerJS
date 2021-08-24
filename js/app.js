@@ -1,5 +1,6 @@
 messageToSend.addEventListener('submit', onMessageSubmit);
 
+userListCloseButton.addEventListener('click', closeUserConfig);
 userModify.addEventListener('submit', onModifySubmit);
 userCreate.addEventListener('submit', onCreateSubmit);
 userCreateButton.addEventListener('click', onCreateUser);

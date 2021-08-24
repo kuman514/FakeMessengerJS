@@ -1,6 +1,7 @@
 const senderSelect = document.querySelector('#sender');
 
 const userConfigButton = document.querySelector(`#user-config-button`);
+const userListCloseButton = document.querySelector('#user-list-close-button');
 const userListConfig = document.querySelector('#user-list-config');
 const userList = document.querySelector('#user-list');
 
