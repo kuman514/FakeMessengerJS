@@ -60,3 +60,7 @@ main {
   width: fit-content;
   background-color: white;
 }
+
+#chatroom-upside, #message-to-send {
+  background-color: brown;
+}
