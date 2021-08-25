@@ -39,28 +39,47 @@ main {
   background-color: white;
 }
 
-.my-chat {
+.my-chat, .opponent-chat {
+  margin: 5px;
   display: flex;
   flex-direction: column;
+}
+
+.my-chat > div, .opponent-chat > div {
+  width: fit-content;
+}
+
+.my-chat {
   align-items: flex-end;
 }
 
-.my-chat > div {
-  width: fit-content;
-  background-color: yellow;
-}
-
 .opponent-chat {
-  display: flex;
-  flex-direction: column;
   align-items: flex-start;
 }
 
-.opponent-chat > div {
-  width: fit-content;
+.my-chat > span, .opponent-chat > span {
+  margin-bottom: 8px;
+}
+
+.my-chat > div > span:last-child, .opponent-chat > div > span:first-child {
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.my-chat > div > span:last-child {
+  background-color: yellow;
+  margin-left: 5px;
+}
+
+.opponent-chat > div > span:first-child {
   background-color: white;
+  margin-right: 5px;
 }
 
 #chatroom-upside, #message-to-send {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   background-color: brown;
 }
