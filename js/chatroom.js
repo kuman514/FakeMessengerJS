@@ -52,6 +52,19 @@ function repaintChat() {
   }
 }
 
+function convertTimestamp(timestamp) {
+  const [year, mon, dat, hr, min, sec] = [
+    timestamp.getFullYear(),
+    timestamp.getMonth(),
+    timestamp.getDate(),
+    timestamp.getHours(),
+    timestamp.getMinutes(),
+    timestamp.getSeconds()
+  ].map((item) => String(item).padStart(2, '0'));
+  const finalTimestamp = `${year}-${mon}-${dat} ${hr}:${min}:${sec}`;
+  return finalTimestamp;
+}
+
 function paintChat(newChat) {
   const newChatElement = document.createElement('div');
   newChatElement.id = `message-${newChat.id}`;
@@ -68,7 +81,7 @@ function paintChat(newChat) {
   const msg = document.createElement('span');
   msg.innerText = newChat.message;
   const ts = document.createElement('span');
-  ts.innerText = newChat.timestamp;
+  ts.innerText = convertTimestamp(newChat.timestamp);
 
   const deleteButton = document.createElement('button');
   deleteButton.innerText = '❌';
