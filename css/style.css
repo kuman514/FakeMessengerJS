@@ -40,17 +40,23 @@ main {
 }
 
 .my-chat {
-  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .my-chat > div {
+  width: fit-content;
   background-color: yellow;
 }
 
 .opponent-chat {
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .opponent-chat > div {
+  width: fit-content;
   background-color: white;
 }
