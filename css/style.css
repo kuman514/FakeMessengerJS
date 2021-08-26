@@ -83,3 +83,11 @@ main {
   justify-content: center;
   background-color: brown;
 }
+
+#chat-list button {
+  all: unset;
+}
+
+#chat-list button:hover {
+  cursor: pointer;
+}
