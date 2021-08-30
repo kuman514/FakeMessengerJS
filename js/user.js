@@ -200,13 +200,13 @@ function paintUserListItem(newUser) {
 
   const modifyButton = document.createElement('button');
   modifyButton.innerText = '🔧';
-  modifyButton.addEventListener('click', onModifyUser);
+  modifyButton.className = 'modify-button';
   newListItem.appendChild(modifyButton);
 
   if (newUser.id !== 0) {
     const removeButton = document.createElement('button');
     removeButton.innerText = '❌';
-    removeButton.addEventListener('click', onRemoveUser);
+    removeButton.className = 'delete-button';
     newListItem.appendChild(removeButton);
   }
 
@@ -217,3 +217,17 @@ function paintUser(newUser) {
   paintUserSelect(newUser);
   paintUserListItem(newUser);
 }
+
+function onClickedUserListItemButton(event) {
+  if (event.target.nodeName === 'BUTTON') {
+    switch (event.target.className) {
+      case 'delete-button':
+        onRemoveUser(event);
+        break;
+      case 'modify-button':
+        onModifyUser(event);
+        break;
+    }
+  }
+}
+

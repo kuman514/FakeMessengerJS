@@ -1,6 +1,7 @@
 chatList.addEventListener('click', onClickedChatButton);
 messageToSend.addEventListener('submit', onMessageSubmit);
 
+userList.addEventListener('click', onClickedUserListItemButton);
 userListCloseButton.addEventListener('click', closeUserConfig);
 userModify.addEventListener('submit', onModifySubmit);
 userCreate.addEventListener('submit', onCreateSubmit);
