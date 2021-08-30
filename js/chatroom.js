@@ -85,7 +85,7 @@ function paintChat(newChat) {
 
   const deleteButton = document.createElement('button');
   deleteButton.innerText = '❌';
-  deleteButton.addEventListener('click', removeMessage);
+  deleteButton.className = 'delete-button';
 
   newChatElement.appendChild(who);
   
@@ -128,4 +128,10 @@ function removeMessage(event) {
   event.target.parentElement.parentElement.remove();
   chats.splice(getChatIndex(deleteMsgId), 1);
   saveChatsToLocalStorage();
+}
+
+function onClickedChatButton(event) {
+  if (event.target.nodeName === 'BUTTON' && event.target.className === 'delete-button') {
+    removeMessage(event);
+  }
 }

@@ -1,3 +1,4 @@
+chatList.addEventListener('click', onClickedChatButton);
 messageToSend.addEventListener('submit', onMessageSubmit);
 
 userListCloseButton.addEventListener('click', closeUserConfig);
